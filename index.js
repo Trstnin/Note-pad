@@ -30,7 +30,7 @@ app.get(`/files/:filename`, (req, res) => {
 
 app.post("/create", (req, res) => {
   fs.writeFile(
-    `./files/${req.body.title.split(" ").join("")}.txt`,
+    `./files/${req.body.title.split(" ").join("").toUpperCase()}.txt`,
     req.body.details,
     (err) => {
       if (err) throw error;
@@ -42,6 +42,7 @@ app.post("/create", (req, res) => {
   res.redirect("/");
 });
 
+
 app.delete(`/delete/:filename`, (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(__dirname, "files", filename);
@@ -52,6 +53,18 @@ app.delete(`/delete/:filename`, (req, res) => {
     res.send("file deleted successfully");
   });
 });
+
+app.get('/edit/:filename', (req, res)=>{
+
+   res.render('edit', {prevName : req.params.filename })
+})
+
+app.post('/edit', (req, res)=> {
+  fs.rename(`./files/${req.body.previous}`, `./files/${req.body.new}.txt`, (err)=>{
+    if(err) throw error
+  res.redirect('/')
+  })
+})
 
 app.listen(PORT, ()=>{
     console.log(`app is listening at ${PORT}`)

@@ -38,8 +38,12 @@
           <h1 class="text-white text-3xl tracking-tighter">
             <%= val %>
           </h1>
-          <a href="/files/<%= val %>" class="text-blue-500 inline-block mt-2">Read more.</a>
-          <a href="" class="text-blue-500 inline-block mt-2 px-5" onclick="deleteFile('<%= val %>')">Delete</a>
+          <div class="flex w-full justify-between items-center">
+            <a href="/files/<%= val %>" class="text-blue-500 inline-block mt-2">Read more.</a>
+            <a href="" class="text-blue-500 inline-block mt-2 px-5" onclick="deleteFile('<%= val %>')">Delete</a>
+            <a href="/edit/<%= val %>"  class="text-blue-500 inline-block mt-2">Edit</a>
+        </div>
+
            
         </div>
 
